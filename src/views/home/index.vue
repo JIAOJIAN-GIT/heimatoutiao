@@ -1,10 +1,15 @@
 <template>
-<div>主页</div>
+<el-container>
+  <el-aside>left</el-aside>
+  <el-container>
+    <el-header>top</el-header>
+    <el-min>content</el-min>
+  </el-container>
+</el-container>
 </template>
 
 <script>
 export default {
-
 }
 </script>
 
