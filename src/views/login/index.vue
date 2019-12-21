@@ -58,9 +58,12 @@ export default {
             data: this.shuxing
           }).then(res => {
             window.localStorage.setItem('token', res.data.data)
-            // console.log(res.data)
+            this.$router.push('/home')
           }).catch(() => {
-
+            this.$message({
+              type: 'warning',
+              message: '手机号或者验证码错误'
+            })
           })
         }
       })
