@@ -7,12 +7,12 @@
         <el-col class="you" :span="12">
             <el-row  type="flex" justify="end">
                 <img :src="userInfo.photo?userInfo.photo:imgsrc" alt="">
-                <el-dropdown>
+                <el-dropdown @command="commands">
                     <span>{{userInfo.name}}</span>
                     <el-dropdown-menu slot="dropdown">
-                        <el-dropdown-item index='aa'>个人信息</el-dropdown-item>
-                        <el-dropdown-item index='aa'>GIT信息</el-dropdown-item>
-                        <el-dropdown-item index='aa'>退出</el-dropdown-item>
+                        <el-dropdown-item command="pim" index='aa'>个人信息</el-dropdown-item>
+                        <el-dropdown-item command="git" index='aa'>GIT信息</el-dropdown-item>
+                        <el-dropdown-item command="quit" index='aa'>退出</el-dropdown-item>
                     </el-dropdown-menu>
                 </el-dropdown>
             </el-row>
@@ -41,6 +41,15 @@ export default {
         console.log(res)
         this.userInfo = res.data.data
       })
+    },
+    commands (command) {
+      if (command === 'pim') {
+      } else if (command === 'git') {
+        window.location.href = 'https://github.com/JIAOJIAN-GIT/heimatoutiao.git'
+      } else if (command === 'quit') {
+        window.localStorage.removeItem('token')
+        this.$router.push('/login')
+      }
     }
   },
   created () {

@@ -13,6 +13,12 @@
 <script>
 
 export default {
+  created () {
+    let token = localStorage.getItem('token')
+    if (!token) {
+      this.$router.push('/login')
+    }
+  }
 }
 </script>
 
