@@ -11,13 +11,8 @@
 </template>
 
 <script>
-import leftlist from '../../components/home/left-list.vue'
-import top from '../../components/home/top.vue'
+
 export default {
-  components: {
-    'leftlist': leftlist,
-    'top': top
-  }
 }
 </script>
 
