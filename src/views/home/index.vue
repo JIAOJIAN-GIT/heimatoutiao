@@ -5,7 +5,7 @@
   </el-aside>
   <el-container>
     <el-header><top></top></el-header>
-    <el-min>content</el-min>
+    <el-main>content</el-main>
   </el-container>
 </el-container>
 </template>
