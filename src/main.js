@@ -6,6 +6,7 @@ import axios from 'axios'
 import component from './components'
 import 'element-ui/lib/theme-chalk/index.css'
 import './style/index.less'
+import './perimission'
 
 Vue.use(elementui)
 Vue.use(component)

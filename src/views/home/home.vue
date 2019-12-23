@@ -20,7 +20,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="less" scoped>
   .el-carousel__item:nth-child(2n) {
     background-color: #99a9bf;
   }
