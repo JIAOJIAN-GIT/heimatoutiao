@@ -5,7 +5,9 @@
   </el-aside>
   <el-container>
     <el-header><top></top></el-header>
-    <el-main>content</el-main>
+    <el-main>
+      <router-view></router-view>
+    </el-main>
   </el-container>
 </el-container>
 </template>
