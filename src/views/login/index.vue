@@ -57,8 +57,8 @@ export default {
             method: 'post',
             data: this.shuxing
           }).then(res => {
-            window.localStorage.setItem('token', `${res.data.data.token}`)
-            console.log(res.data.data)
+            window.localStorage.setItem('token', `${res.data.token}`)
+            // console.log(res.data.data)
             this.$router.push('/home')
           }).catch(() => {
             this.$message({

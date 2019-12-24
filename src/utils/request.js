@@ -6,4 +6,8 @@ axios.interceptors.request.use(function (config) {
   config.headers.Authorization = `Bearer ${token}`// 统一注入token
   return config
 }, function () {})
+
+axios.interceptors.response.use(function (response) {
+  return response.data ? response.data : {}
+}, function () {})
 export default axios
