@@ -18,10 +18,14 @@ const routes = [{
   path: '/home',
   name: 'home',
   component: Home,
-  children: [{
-    path: '',
-    component: Home2
-  }]
+  children: [
+    { path: '',
+      component: Home2 },
+    {
+      path: 'comment',
+      component: () => import('../views/comment/pinglunguanli.vue')
+    }
+  ]
 }
   // {
   //   path: '/about',
