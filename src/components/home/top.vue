@@ -30,13 +30,8 @@ export default {
   },
   methods: {
     diaoyong () {
-      let token = localStorage.getItem('token')
-      console.log(token)
       this.$axios({
-        url: '/user/profile',
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
+        url: '/user/profile'
       }).then(res => {
         console.log(res)
         this.userInfo = res.data.data
