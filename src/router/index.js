@@ -24,6 +24,10 @@ const routes = [{
     {
       path: 'comment',
       component: () => import('../views/comment/pinglunguanli.vue')
+    },
+    {
+      path: 'articles',
+      component: () => import('../views/comment/neirongliebiao.vue')
     }
   ]
 }

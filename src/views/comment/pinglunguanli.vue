@@ -11,7 +11,7 @@
         <el-table-column label="操作">
             <template slot-scope="obj">
                 <el-button size="small" type="text">修改</el-button>
-                <el-button size="small" type="text">{{obj.row.comment_status?"关闭":"打开"}}评论</el-button>
+                <el-button @click="kaiguan(obj.row)" size="small" type="text">{{obj.row.comment_status?"关闭":"打开"}}评论</el-button>
             </template>
         </el-table-column>
     </el-table>
@@ -33,12 +33,29 @@ export default {
         params: { response_type: 'comment' }
       }).then(res => {
         this.list = res.data.results
-        console.log(res.data.results)
+        // console.log(res.data.results)
       })
     },
     formatterfunction (row, column, cellValue, index) {
-      console.log(cellValue)
+    //   console.log(cellValue)
       return cellValue ? '正常' : '关闭'
+    },
+    kaiguan (row) {
+      let tf = row.comment_status ? '关闭' : '打开'
+      this.$confirm(`您确定要${tf}此评论吗？`, '温馨提示').then(() => {
+        this.$axios({
+          url: '/comments/status',
+          method: 'put',
+          params: {
+            article_id: row.id
+          },
+          data: {
+            allow_comment: !row.comment_status
+          }
+        }).then(() => {
+          this.getComment()
+        })
+      })
     }
   },
   created () {
