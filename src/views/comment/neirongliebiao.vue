@@ -3,7 +3,7 @@
     <bread-crunmb slot="header">
         <template slot="title">内容列表</template>
     </bread-crunmb>
-    <el-form>
+    <el-form style="padding-left:10px">
         <el-form-item label="文章状态:">
             <el-radio-group v-model="radios">
                 文章状态：
@@ -30,6 +30,31 @@
             </el-time-picker>
         </el-form-item>
     </el-form>
+
+    <!-- 主题 -->
+    <div class="title">
+        <span>共找到62221条符合条件的内容</span>
+    </div>
+    <div class="list">
+        <div class="left">
+            <img src="../../assets/404.png" alt="">
+            <div>
+                <span>asdasdasd</span>
+                <el-tag>标签</el-tag>
+                <span>assdassdadad</span>
+            </div>
+        </div>
+        <div class="right">
+            <div>
+                <i class="el-icon-edit"></i>
+                <span>修改</span>
+            </div>
+            <div>
+                <i class="el-icon-delete"></i>
+                <span>删除</span>
+            </div>
+        </div>
+    </div>
 </el-card>
 </template>
 
@@ -59,6 +84,37 @@ export default {
 }
 </script>
 
-<style>
-
+<style lang="less" scoped>
+.title{
+    font-size: 15px;
+    line-height: 60px;
+    border-bottom: 1px dashed #ccc;
+    padding-left: 10px
+}
+.list{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px solid #f2f3f5;
+    font-size: 14px;
+    .left{
+        display: flex;
+        img{
+            width: 200px;
+            height: 140px;
+            margin-right: 10px;
+        }
+        div{
+            display:flex;
+            flex-direction: column;
+            line-height: 30px;
+        }
+    }
+    .right{
+        display: flex;
+        div{
+            margin-left: 20px;
+        }
+    }
+}
 </style>
