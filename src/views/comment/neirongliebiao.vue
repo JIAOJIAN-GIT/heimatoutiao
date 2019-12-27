@@ -31,7 +31,7 @@
 
     <!-- 主题 -->
     <div class="title">
-        <span>共找到62221条符合条件的内容</span>
+        <span>共找到{{paging.total}}条符合条件的内容</span>
     </div>
     <div class="list" v-for="item in list" :key="item.id">
         <div class="left">

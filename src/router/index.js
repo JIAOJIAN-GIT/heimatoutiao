@@ -28,6 +28,10 @@ const routes = [{
     {
       path: 'articles',
       component: () => import('../views/comment/neirongliebiao.vue')
+    },
+    {
+      path: 'publish',
+      component: () => import('../views/comment/publishArticle.vue')
     }
   ]
 }
