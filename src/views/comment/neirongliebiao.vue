@@ -49,7 +49,7 @@
             </div>
             <div>
                 <i class="el-icon-delete"></i>
-                <span>删除</span>
+                <span @click="del(item.id)">删除</span>
             </div>
         </div>
     </div>
@@ -124,6 +124,20 @@ export default {
     }
   },
   methods: {
+    del (id) {
+      this.$confirm('你确定要删除该文章吗？').then(() => {
+        this.$axios({
+          url: `/articles/${id.toString()}`,
+          method: 'delete'
+        }).then(res => {
+          this.$message({
+            type: 'success',
+            message: '删除成功'
+          })
+          this.getArticles()
+        })
+      })
+    },
     changePage (newPage) {
       this.paging.currentPage = newPage
       this.changeTwo()
