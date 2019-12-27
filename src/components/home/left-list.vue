@@ -34,6 +34,7 @@ export default {
 <style lang="less" scopet>
 .rong{
     width: 230px;
+    min-height: 100vh;
     .el-menu{
         border-right: none;
     }
