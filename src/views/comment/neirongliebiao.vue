@@ -5,7 +5,7 @@
     </bread-crunmb>
     <el-form style="padding-left:10px">
         <el-form-item label="文章状态:">
-            <el-radio-group v-model="radios">
+            <el-radio-group v-model="formData.status" @change="change">
                 文章状态：
                 <el-radio :label="5">全部</el-radio>
                 <el-radio :label="0">草稿</el-radio>
@@ -16,14 +16,15 @@
         </el-form-item>
         <el-form-item label="频道列表">
             <!-- {{channels}} -->
-            <el-select v-model="value">
+            <el-select v-model="formData.channel_id"  @change="change">
                 <el-option v-for="item in channels" :key="item.id" :label="item.name" :value="item.id"></el-option>
             </el-select>
         </el-form-item>
         <el-form-item label="时间选择">
+            {{formData.shijian}}
             <el-date-picker
-                v-model="shijian"
-                type="daterange">
+                v-model="formData.shijian"
+                type="daterange"  @change="change" value-format="yyyy-MM-dd">
             </el-date-picker>
         </el-form-item>
     </el-form>
@@ -59,9 +60,11 @@
 export default {
   data () {
     return {
-      radios: 0,
-      value: null,
-      shijian: [],
+      formData: {
+        status: 5,
+        channel_id: null,
+        shijian: []
+      },
       channels: [],
       list: [],
       url: require('../../assets/404.png')
@@ -105,9 +108,19 @@ export default {
         this.channels = res.data.channels
       })
     },
-    getArticles () {
+    change () {
+      let params = {
+        status: this.formData.status === 5 ? null : this.formData.status,
+        channel_id: this.formData.channel_id,
+        begin_pubdate: this.formData.shijian.length ? this.formData.shijian[0] : null,
+        end_pubdate: this.formData.shijian.length > 1 ? this.formData.shijian[1] : null
+      }
+      this.getArticles(params)
+    },
+    getArticles (params) {
       this.$axios({
-        url: '/articles'
+        url: '/articles',
+        params
       }).then(res => {
         this.list = res.data.results
         console.log(res.data.results)
