@@ -5,7 +5,7 @@
     </bread-crunmb>
     <el-form style="padding-left:10px">
         <el-form-item label="文章状态:">
-            <el-radio-group v-model="formData.status" @change="change">
+            <el-radio-group v-model="formData.status">
                 文章状态：
                 <el-radio :label="5">全部</el-radio>
                 <el-radio :label="0">草稿</el-radio>
@@ -16,7 +16,7 @@
         </el-form-item>
         <el-form-item label="频道列表">
             <!-- {{channels}} -->
-            <el-select v-model="formData.channel_id"  @change="change">
+            <el-select v-model="formData.channel_id"  >
                 <el-option v-for="item in channels" :key="item.id" :label="item.name" :value="item.id"></el-option>
             </el-select>
         </el-form-item>
@@ -24,7 +24,7 @@
             {{formData.shijian}}
             <el-date-picker
                 v-model="formData.shijian"
-                type="daterange"  @change="change" value-format="yyyy-MM-dd">
+                type="daterange"   value-format="yyyy-MM-dd">
             </el-date-picker>
         </el-form-item>
     </el-form>
@@ -68,6 +68,15 @@ export default {
       channels: [],
       list: [],
       url: require('../../assets/404.png')
+    }
+  },
+  watch: {
+    formData: {
+      handler: function () {
+        // alert(1)
+        this.change()
+      },
+      deep: true
     }
   },
   filters: {
