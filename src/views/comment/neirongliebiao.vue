@@ -53,6 +53,15 @@
             </div>
         </div>
     </div>
+    <el-row class="paging" type="flex" justify="center" align="middle" style="height:60px">
+        <el-pagination background
+        layout="prev, pager, next"
+        :current-page="paging.currentPage"
+        :total="paging.total"
+        :page-size="paging.pageSize"
+        @current-change="changePage">
+        </el-pagination>
+    </el-row>
 </el-card>
 </template>
 
@@ -64,6 +73,11 @@ export default {
         status: 5,
         channel_id: null,
         shijian: []
+      },
+      paging: {
+        pageSize: 10,
+        total: 100,
+        currentPage: 1
       },
       channels: [],
       list: [],
@@ -110,6 +124,10 @@ export default {
     }
   },
   methods: {
+    changePage (newPage) {
+      this.paging.currentPage = newPage
+      this.changeTwo()
+    },
     zhuangtai () {
       this.$axios({
         url: '/channels'
@@ -118,7 +136,13 @@ export default {
       })
     },
     change () {
+      this.paging.currentPage = 1
+      this.changeTwo()
+    },
+    changeTwo () {
       let params = {
+        page: this.paging.currentPage,
+        per_page: this.paging.pageSize,
         status: this.formData.status === 5 ? null : this.formData.status,
         channel_id: this.formData.channel_id,
         begin_pubdate: this.formData.shijian.length ? this.formData.shijian[0] : null,
@@ -133,12 +157,13 @@ export default {
       }).then(res => {
         this.list = res.data.results
         console.log(res.data.results)
+        this.paging.total = res.data.total_count
       })
     }
   },
   created () {
     this.zhuangtai()
-    this.getArticles()
+    this.getArticles({ page: 1, per_page: 10 })
   }
 }
 </script>
@@ -176,4 +201,10 @@ export default {
         }
     }
 }
+// .paging{
+//     height: 60px;
+//     display: flex;
+//     justify-content: center;
+//     align-items: center
+// }
 </style>
