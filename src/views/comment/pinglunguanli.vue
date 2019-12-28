@@ -3,7 +3,7 @@
     <bread-crunmb slot="header">
         <template slot="title">评论管理</template>
     </bread-crunmb>
-    <el-table :data="list">
+    <el-table :data="list" v-loading="loading">
         <el-table-column prop="title" label="标题" width="600"></el-table-column>
         <el-table-column :formatter="formatterfunction" prop="comment_status" label="评论状态"></el-table-column>
         <el-table-column prop="total_comment_count" label="总评论数"></el-table-column>
@@ -34,6 +34,7 @@ export default {
   data () {
     return {
       list: [],
+      loading: false,
       page: {
         total: 100,
         pageSize: 10,
@@ -51,12 +52,14 @@ export default {
       this.getComment2()
     },
     getComment2 () {
+      this.loading = true
       this.$axios({
         url: '/articles',
         params: { response_type: 'comment', page: this.page.currentPage, per_page: this.page.pageSize }
       }).then(res => {
         this.list = res.data.results
         this.page.total = res.data.total_count
+        this.loading = false
       })
     },
     formatterfunction (row, column, cellValue, index) {
