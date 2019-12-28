@@ -33,7 +33,7 @@
     <div class="title">
         <span>共找到{{paging.total}}条符合条件的内容</span>
     </div>
-    <div class="list" v-for="item in list" :key="item.id">
+    <div class="list" v-for="(item,index) in list" :key="index">
         <div class="left">
             <img :src="item.cover.images.length ? item.cover.images[0] : url" alt="">
             <div>

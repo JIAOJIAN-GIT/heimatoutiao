@@ -15,6 +15,16 @@
             </template>
         </el-table-column>
     </el-table>
+    <el-row type="flex" justify="center" align="middle" style="height:60px">
+      <el-pagination
+      background
+      layout="prev, pager, next"
+     :total="page.total"
+     :page-size="page.pageSize"
+     :current-page="page.currentPage"
+     @current-change="changPage">
+      </el-pagination>
+    </el-row>
 </el-card>
 
 </template>
@@ -23,17 +33,30 @@
 export default {
   data () {
     return {
-      list: []
+      list: [],
+      page: {
+        total: 100,
+        pageSize: 10,
+        currentPage: 1
+      }
     }
   },
   methods: {
+    changPage (newPage) {
+      this.page.currentPage = newPage
+      this.getComment2()
+    },
     getComment () {
+      this.page.currentPage = 1
+      this.getComment2()
+    },
+    getComment2 () {
       this.$axios({
         url: '/articles',
-        params: { response_type: 'comment' }
+        params: { response_type: 'comment', page: this.page.currentPage, per_page: this.page.pageSize }
       }).then(res => {
         this.list = res.data.results
-        // console.log(res.data.results)
+        this.page.total = res.data.total_count
       })
     },
     formatterfunction (row, column, cellValue, index) {
@@ -47,7 +70,7 @@ export default {
           url: '/comments/status',
           method: 'put',
           params: {
-            article_id: row.id
+            article_id: row.id.toString()
           },
           data: {
             allow_comment: !row.comment_status
@@ -59,7 +82,7 @@ export default {
     }
   },
   created () {
-    this.getComment()
+    this.getComment({ page: 1, per_page: 10 })
   }
 }
 </script>
