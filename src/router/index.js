@@ -32,6 +32,10 @@ const routes = [{
     {
       path: 'publish',
       component: () => import('../views/comment/publishArticle.vue')
+    },
+    {
+      path: 'material',
+      component: () => import('../views/comment/material.vue')
     }
   ]
 }
